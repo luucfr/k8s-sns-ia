@@ -23,9 +23,12 @@ spec:
       containers:
       - name: whisper
         image: ghcr.io/luucfr/whisper-backend/whisper:main
-        ports:
+        imagePullPolicy: Always
+        ports:                            # Déplacez ports ici, sous containers
         - containerPort: 80
           name: whisper
+      imagePullSecrets:
+      - name: ghcr-secret
 
 ---
 apiVersion: v1
