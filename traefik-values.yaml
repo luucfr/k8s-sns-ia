@@ -1,0 +1,34 @@
+deployment:
+  replicas: 2
+
+ports:
+  web:
+    redirectTo: websecure
+  websecure:
+    tls:
+      enabled: true
+
+ingressRoute:
+  dashboard:
+    enabled: true
+
+logs:
+  general:
+    level: INFO
+
+providers:
+  kubernetesCRD:
+    enabled: true
+  kubernetesIngress:
+    enabled: true
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        secretName: traefik-cert
+
+service:
+  annotations:
+    metallb.universe.tf/address-pool: default-pool
+  type: LoadBalancer
