@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: ollama
   namespace: ollama
-  labels:
-    app: ollama
 spec:
   replicas: 2
   selector:
@@ -20,9 +18,7 @@ spec:
         image: ollama/ollama:latest
         ports:
         - containerPort: 11434
-        resources:
-          limits:
-            nvidia.com/gpu: 1
+          name: ollama
 ---
 apiVersion: v1
 kind: Service
