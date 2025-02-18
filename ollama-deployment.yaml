@@ -26,6 +26,7 @@ spec:
           - "/bin/sh"
           - "-c"
           - |
+              OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
               sleep 5
               ollama pull llama3.2:1b
