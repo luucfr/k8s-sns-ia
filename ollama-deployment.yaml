@@ -26,7 +26,7 @@ spec:
           - "/bin/sh"
           - "-c"
           - |
-              ollama pull llama3.2:1b && curl -X POST http://localhost:11434/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2:1b", "keep_alive": -1}'
+              sleep 5 && ollama pull llama3.2:1b && curl -X POST http://localhost:11434/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2:1b", "keep_alive": -1}'
 
 ---
 apiVersion: v1
