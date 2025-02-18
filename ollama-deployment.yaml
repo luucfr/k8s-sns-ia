@@ -19,6 +19,9 @@ spec:
         ports:
         - containerPort: 11434
           name: ollama
+        env:
+        - name: OLLAMA_MODELS
+          value: "llama3.2:1b"
 ---
 apiVersion: v1
 kind: Service
