@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backend-ingress
+  name: whisper-ingress
   namespace: whisper
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
@@ -14,6 +14,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: backend
+            name: whisper
             port:
-              number: 3001
+              number: 8080
