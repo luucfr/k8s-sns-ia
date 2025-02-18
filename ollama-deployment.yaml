@@ -19,9 +19,6 @@ spec:
         ports:
         - containerPort: 11434
           name: ollama
-        env:
-        - name: OLLAMA_KEEP_ALIVE
-          value: "-1"
         command:
           - "/bin/sh"
           - "-c"
