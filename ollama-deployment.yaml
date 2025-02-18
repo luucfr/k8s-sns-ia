@@ -28,7 +28,8 @@ spec:
           - |
               /bin/ollama serve & 
               sleep 5
-              wget --post-data '{"model": "llama3.2:1b", "keep_alive": -1}' --header="Content-Type: application/json" http://localhost:11434/api/generate
+              ollama pull llama3.2:1b
+            #wget --post-data '{"model": "llama3.2:1b", "keep_alive": -1}' --header="Content-Type: application/json" http://localhost:11434/api/generate
 
 ---
 apiVersion: v1
