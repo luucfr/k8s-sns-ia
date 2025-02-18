@@ -28,7 +28,7 @@ spec:
           - |
               /bin/ollama serve & 
               sleep 5
-              curl -X POST http://localhost:11434/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2:1b", "keep_alive": -1}'
+              wget --post-data '{"model": "llama3.2:1b", "keep_alive": -1}' --header="Content-Type: application/json" http://localhost:11434/api/generate
 
 ---
 apiVersion: v1
