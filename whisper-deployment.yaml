@@ -18,13 +18,13 @@ spec:
         image: ghcr.io/luucfr/whisper-backend/whisper:main
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
           name: whisper
         
         readinessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 8000
           initialDelaySeconds: 10
           periodSeconds: 10
           failureThreshold: 3
@@ -43,8 +43,8 @@ spec:
     app: whisper
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8000
+    targetPort: 8000
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -65,4 +65,4 @@ spec:
           service:
             name: whisper
             port:
-              number: 8080
+              number: 8000
