@@ -4,7 +4,7 @@ metadata:
   name: ollama
   namespace: ollama
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ollama
@@ -28,7 +28,9 @@ spec:
               sleep 5
               ollama pull llama3.2:1b
               wait $!
-
+        resources:
+          limits:
+            nvidia.com/gpu: 4 # Demande l'utilisation d'un GPU NVIDIA
         readinessProbe:
           httpGet:
             path: /
@@ -36,6 +38,8 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 10
           failureThreshold: 3
+      runtimeClassName: nvidia
+
 ---
 apiVersion: v1
 kind: Service
@@ -60,7 +64,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: baie-qua.luuc.fr
+  - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
       - path: /
