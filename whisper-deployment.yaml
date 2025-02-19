@@ -20,13 +20,15 @@ spec:
         ports:
         - containerPort: 8080
           name: whisper
-      readinessProbe:
+        
+        readinessProbe:
           httpGet:
             path: /
             port: 8080
           initialDelaySeconds: 10
           periodSeconds: 10
           failureThreshold: 3
+      
       imagePullSecrets:
       - name: ghcr-secret
       
