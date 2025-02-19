@@ -26,7 +26,7 @@ spec:
               OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
               sleep 5
-              ollama pull llama3.2:1b
+              ollama pull llama3.3:70b
               wait $!
         resources:
           limits:
