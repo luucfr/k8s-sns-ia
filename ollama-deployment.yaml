@@ -60,7 +60,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: baie-qua.luuc.fr
+  - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
       - path: /
