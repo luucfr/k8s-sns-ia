@@ -27,7 +27,6 @@ spec:
               /bin/ollama serve & 
               sleep 5
               ollama pull llama3.3:70b
-              ollama run llama3.3:70b ""
               wait $!
         resources:
           limits:
