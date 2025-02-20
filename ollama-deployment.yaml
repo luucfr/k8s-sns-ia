@@ -31,10 +31,6 @@ spec:
         resources:
           limits:
             nvidia.com/gpu: 3 # Demande l'utilisation d'un GPU NVIDIA
-        requests:
-            bandwidth:
-              egress: "50M"   # Limite le débit sortant à 50 Mbps
-              ingress: "50M"   # Limite le débit entrant à 50 Mbps
         readinessProbe:
           httpGet:
             path: /
