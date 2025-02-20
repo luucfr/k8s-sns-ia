@@ -24,7 +24,6 @@ spec:
           - "-c"
           - |
               OLLAMA_KEEP_ALIVE=-1 &&
-              OLLAMA_MODELS=/home/ollama/models &&
               /bin/ollama serve & 
               sleep 5
               ollama pull llama3.3:70b
@@ -40,7 +39,7 @@ spec:
           periodSeconds: 10
           failureThreshold: 3
         volumeMounts:
-          - mountPath: /home/ollama/models  # Le chemin où le volume sera monté dans le conteneur
+          - mountPath: /root/.ollama/models  # Le chemin où le volume sera monté dans le conteneur
             name: mon-volume
             readOnly: false
       runtimeClassName: nvidia
