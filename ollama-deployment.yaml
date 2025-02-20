@@ -24,6 +24,11 @@ spec:
           - "-c"
           - |
               export OLLAMA_KEEP_ALIVE=-1
+              export OLLAMA_LLM_LIBRARY=cuda
+              export OLLAMA_KV_CACHE_TYPE=gpu
+              export OLLAMA_FLASH_ATTENTION=true
+              export OLLAMA_MAX_LOADED_MODELS=1
+              export OLLAMA_NUM_PARALLEL=2
               /bin/ollama serve & 
               sleep 5
               ollama run llama3.3:70b ""
