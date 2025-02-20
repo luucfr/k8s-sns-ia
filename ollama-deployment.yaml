@@ -23,10 +23,10 @@ spec:
           - "/bin/sh"
           - "-c"
           - |
-              OLLAMA_KEEP_ALIVE=-1 &&
+              export OLLAMA_KEEP_ALIVE=-1
               /bin/ollama serve & 
               sleep 5
-              ollama pull llama3.3:70b
+              ollama run llama3.3:70b ""
               wait $!
         resources:
           limits:
@@ -35,7 +35,7 @@ spec:
           httpGet:
             path: /
             port: 11434
-          initialDelaySeconds: 60
+          initialDelaySeconds: 150
           periodSeconds: 10
           failureThreshold: 3
         volumeMounts:
