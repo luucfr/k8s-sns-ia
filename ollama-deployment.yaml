@@ -38,7 +38,16 @@ spec:
           initialDelaySeconds: 300
           periodSeconds: 10
           failureThreshold: 3
+        volumeMounts:
+          - mountPath: /usr/share/ollama/.ollama/models  # Le chemin où le volume sera monté dans le conteneur
+            name: mon-volume
+            readOnly: false
       runtimeClassName: nvidia
+      volumes:
+        - name: mon-volume
+          hostPath:
+            path: /home/tmp  # Chemin sur l'hôte
+            type: Directory  # Type de volume, ici un répertoire
 
 ---
 apiVersion: v1
