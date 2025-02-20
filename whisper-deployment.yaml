@@ -4,7 +4,7 @@ metadata:
   name: whisper
   namespace: whisper
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: whisper
@@ -20,7 +20,9 @@ spec:
         ports:
         - containerPort: 8000
           name: whisper
-        
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # Demande l'utilisation d'un GPU NVIDIA
         readinessProbe:
           httpGet:
             path: /health
@@ -28,7 +30,6 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           failureThreshold: 3
-      
       imagePullSecrets:
       - name: ghcr-secret
       
@@ -56,7 +57,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: baie-qua.luuc.fr
+  - host: sns-ia-02
     http:
       paths:
       - path: /
