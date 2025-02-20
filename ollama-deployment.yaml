@@ -30,7 +30,7 @@ spec:
               wait $!
         resources:
           limits:
-            nvidia.com/gpu: 4 # Demande l'utilisation d'un GPU NVIDIA
+            nvidia.com/gpu: 3 # Demande l'utilisation d'un GPU NVIDIA
         readinessProbe:
           httpGet:
             path: /
