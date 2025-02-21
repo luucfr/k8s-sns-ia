@@ -29,7 +29,7 @@ spec:
             value: "cuda>=12.8"
         resources:
           limits:
-            nvidia.com/gpu: 1 # Demande l'utilisation d'un GPU NVIDIA
+            nvidia.com/gpu: 1
         readinessProbe:
           httpGet:
             path: /health
@@ -37,6 +37,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           failureThreshold: 3
+        runtimeClassName: nvidia  
       imagePullSecrets:
       - name: ghcr-secret
       
