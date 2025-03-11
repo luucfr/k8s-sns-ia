@@ -68,7 +68,7 @@ spec:
   - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
-      - path: /whisper
+      - path: /transcribe
         pathType: Prefix
         backend:
           service:
