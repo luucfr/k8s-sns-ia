@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: ollama
   namespace: ollama
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: ollama
@@ -48,7 +47,6 @@ spec:
           hostPath:
             path: /home/tmp  # Chemin sur l'hôte
             type: Directory  # Type de volume, ici un répertoire
-
 ---
 apiVersion: v1
 kind: Service
