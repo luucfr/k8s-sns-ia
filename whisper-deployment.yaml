@@ -37,7 +37,7 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 10
           failureThreshold: 3
-      runtimeClassName: nvidia    
+      runtimeClassName: nvidia
       imagePullSecrets:
       - name: ghcr-secret
       
@@ -65,10 +65,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: sns-ia-02
+  - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
-      - path: /
+      - path: /whisper/
         pathType: Prefix
         backend:
           service:
