@@ -28,15 +28,13 @@ spec:
               ollama pull llama3.3:70b
               wait $!
         env:
-          - name: NVIDIA_VISIBLE_DEVICES
-            value: "1,2,3"  # Spécifie les GPU visibles
           - name: NVIDIA_DRIVER_CAPABILITIES
             value: "compute,utility"
           - name: NVIDIA_REQUIRE_CUDA
             value: "cuda>=12.8"
         resources:
           limits:
-            nvidia.com/gpu: 4  # Demande 4 GPU
+            nvidia.com/gpu: 3  # Demande 4 GPU
         readinessProbe:
           httpGet:
             path: /
