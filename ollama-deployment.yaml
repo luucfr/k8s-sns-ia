@@ -73,7 +73,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: sns-ia-02.goat-woodpecker.ts.net
+  - host: cluster.ai.api.snsolutions.fr
     http:
       paths:
       - path: /
