@@ -23,15 +23,10 @@ spec:
           - "/bin/sh"
           - "-c"
           - |
-              export OLLAMA_KEEP_ALIVE=-1
-              export OLLAMA_LLM_LIBRARY=cuda
-              export OLLAMA_KV_CACHE_TYPE=gpu
-              export OLLAMA_FLASH_ATTENTION=true
-              export OLLAMA_MAX_LOADED_MODELS=1
-              export OLLAMA_NUM_PARALLEL=2
+              OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
               sleep 5
-              ollama run llama3.3:70b ""
+              ollama pull llama3.3:70b
               wait $!
         resources:
           limits:
@@ -40,7 +35,7 @@ spec:
           httpGet:
             path: /
             port: 11434
-          initialDelaySeconds: 150
+          initialDelaySeconds: 300
           periodSeconds: 10
           failureThreshold: 3
         volumeMounts:
@@ -81,7 +76,7 @@ spec:
   - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
-      - path: /resume
+      - path: /
         pathType: Prefix
         backend:
           service:
