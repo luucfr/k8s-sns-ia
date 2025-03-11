@@ -81,7 +81,7 @@ spec:
   - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
-      - path: /resume/
+      - path: /resume
         pathType: Prefix
         backend:
           service:
