@@ -36,7 +36,7 @@ metadata:
   namespace: kube-system
 spec:
   ports:
-    - port: 4654
+    - port: 80
       targetPort: 4654
   selector:
     k8s-app: skooner
@@ -58,6 +58,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: whisper
+            name: skooner
             port:
-              number: 4654
+              number: 80
