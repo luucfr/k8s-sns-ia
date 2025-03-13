@@ -26,6 +26,7 @@ spec:
               /bin/ollama serve & 
               sleep 5
               ollama pull llama3.3:70b
+              ollama run llama3.3:70b ""
               wait $!
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
