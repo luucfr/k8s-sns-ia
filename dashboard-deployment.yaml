@@ -54,7 +54,7 @@ spec:
   - host: cluster.ai.api.snsolutions.fr
     http:
       paths:
-      - path: /transcribe
+      - path: /dashboard
         pathType: Prefix
         backend:
           service:
