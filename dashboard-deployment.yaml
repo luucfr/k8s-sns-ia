@@ -51,10 +51,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: cluster.ai.api.snsolutions.fr
+  - host: sns-ia-02.goat-woodpecker.ts.net
     http:
       paths:
-      - path: /dashboard
+      - path: /
         pathType: Prefix
         backend:
           service:
