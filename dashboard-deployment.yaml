@@ -103,3 +103,12 @@ roleRef:
   kind: Role
   name: dashboard-access
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubernetes-dashboard-csrf
+  namespace: kube-system
+data:
+  csrf: "3q2+7w=="
+type: Opaque
