@@ -1,114 +1,63 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: dashboard-deployment
-  namespace: default
+  name: skooner
+  namespace: kube-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kubernetes-dashboard
+      k8s-app: skooner
   template:
     metadata:
       labels:
-        app: kubernetes-dashboard
+        k8s-app: skooner
     spec:
       containers:
-        - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:latest
-          ports:
-            - containerPort: 8000
-          volumeMounts:
-            - mountPath: /tmp
-              name: tmp-volume
-          resources:
-            requests:
-              cpu: 100m
-              memory: 200Mi
-            limits:
-              cpu: 250m
-              memory: 400Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            runAsUser: 1001
-            runAsGroup: 2001
-            capabilities:
-              drop: ["ALL"]
-      volumes:
-        - name: tmp-volume
-          emptyDir: {}
-      securityContext:
-        runAsNonRoot: true
-        seccompProfile:
-          type: RuntimeDefault
-      nodeSelector: {}
-      tolerations: []
-      affinity: {}
+      - name: skooner
+        image: ghcr.io/skooner-k8s/skooner:stable
+        ports:
+        - containerPort: 4654
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /
+            port: 4654
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      nodeSelector:
+        'kubernetes.io/os': linux
+
 ---
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: reverse-proxy
-  namespace: default
+  name: skooner
+  namespace: kube-system
 spec:
-  selector:
-    app: reverse-proxy
   ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+    - port: 4654
+      targetPort: 4654
+  selector:
+    k8s-app: skooner
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: reverse-proxy-ingress
-  namespace: default
+  name: skooner
+  namespace: kube-system
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: cluster.ai.api.snsolutions.fr
-      http:
-        paths:
-          - path: /dashboard
-            pathType: Prefix
-            backend:
-              service:
-                name: reverse-proxy
-                port:
-                  number: 8000
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: dashboard-access
-  namespace: kube-system
-rules:
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["get", "list", "watch", "create"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: dashboard-access-binding
-  namespace: kube-system
-subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
-roleRef:
-  kind: Role
-  name: dashboard-access
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: kubernetes-dashboard-csrf
-  namespace: kube-system
-data:
-  csrf: "3q2+7w=="
-type: Opaque
+  - host: cluster.ai.api.snsolutions.fr
+    http:
+      paths:
+      - path: /transcribe
+        pathType: Prefix
+        backend:
+          service:
+            name: whisper
+            port:
+              number: 4654
