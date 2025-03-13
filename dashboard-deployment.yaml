@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-dashboard
-          image: kubernetesui/dashboard:v2.0.0
+          image: kubernetesui/dashboard:latest
           ports:
             - containerPort: 8000
           volumeMounts:
@@ -28,6 +28,13 @@ spec:
             limits:
               cpu: 250m
               memory: 400Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1001
+            runAsGroup: 2001
+            capabilities:
+              drop: ["ALL"]
       volumes:
         - name: tmp-volume
           emptyDir: {}
@@ -35,13 +42,6 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
-      containersSecurityContext:
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        runAsUser: 1001
-        runAsGroup: 2001
-        capabilities:
-          drop: ["ALL"]
       nodeSelector: {}
       tolerations: []
       affinity: {}
