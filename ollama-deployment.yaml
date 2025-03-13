@@ -32,6 +32,8 @@ spec:
             value: "compute,utility"
           - name: NVIDIA_REQUIRE_CUDA
             value: "cuda>=12.8"
+          - name: OLLAMA_KEEP_ALIVE
+            value: "-1"
         resources:
           limits:
             nvidia.com/gpu: 3  # Demande 4 GPU
