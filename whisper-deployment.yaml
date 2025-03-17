@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: whisper
-        image: ghcr.io/luucfr/whisper-backend/whisper:k3s
+        image: ghcr.io/luucfr/whisper-backend/whisper:main
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
