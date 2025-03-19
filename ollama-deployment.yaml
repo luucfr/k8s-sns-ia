@@ -24,9 +24,11 @@ spec:
           - |
               OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
-              sleep 5
-              ollama pull llama3.3:70b
-              ollama run llama3.3:70b ""
+              apt update
+              apt install -y wget
+              wget 
+              ollama create model-resume -f Modelfile
+              ollama run model-resume:latest ""
               wait $!
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
