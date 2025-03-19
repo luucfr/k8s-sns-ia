@@ -26,7 +26,7 @@ spec:
               /bin/ollama serve & 
               apt update
               apt install -y wget
-              wget 
+              wget https://raw.githubusercontent.com/luucfr/k8s-sns-ia/refs/heads/main/ollama/Modelfile
               ollama create model-resume -f Modelfile
               ollama run model-resume:latest ""
               wait $!
