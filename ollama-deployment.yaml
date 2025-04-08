@@ -24,11 +24,7 @@ spec:
           - |
               OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
-              apt update
-              apt install -y wget
-              wget https://raw.githubusercontent.com/luucfr/k8s-sns-ia/refs/heads/main/ollama/Modelfile
-              ollama create model-resume -f Modelfile
-              ollama run model-resume:latest ""
+              ollama run Luucfr/sns-summary:latest ""
               wait $!
         env:
           - name: NVIDIA_DRIVER_CAPABILITIES
