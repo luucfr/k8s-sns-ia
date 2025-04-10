@@ -24,6 +24,7 @@ spec:
           - |
               OLLAMA_KEEP_ALIVE=-1 &&
               /bin/ollama serve & 
+              ollama pull Luucfr/sns-summary:latest
               ollama run Luucfr/sns-summary:latest ""
               wait $!
         env:
